@@ -18,11 +18,19 @@ AppAsset::register($this);
 <head>
     <meta charset='<?= Yii::$app->charset ?>'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="shortcut icon" href="img/defult_text.ico">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+
     <style>
+        .navbar-default{
+            background-color: #fff;
+        }
+
     </style>
- 
+        <style>
+@import url('https://fonts.googleapis.com/css?family=Baloo');
+</style>
     <?php $this->head() ?>
 
      
@@ -34,20 +42,20 @@ AppAsset::register($this);
         'brandLabel' => 'ISTMS - DHS',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar navbar-default navbar-fixed-top','id' => 'mainNav',
+            'class' => 'navbar navbar-default navbar-fixed-top navbar top-nav-collapse affix','id' => 'mainNav',
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-left page-scroll'],
+        'options' => ['class' => 'nav navbar-nav navbar-left navbar-border'],
         'items' => [
-            ['label' => 'Home', 'url' => ['site/index']],
-            ['label' => 'About','url' => '#about',],
-            ['label' => 'Contact', 'url' => '#contact',],
-            ['label' => 'Services', 'url' => '#services',],
-            ['label' => 'Documents', 'url' => ['index']],
+
+             ['label'=>'Home', 'url'=>['site/index']],
+             ['label'=>'Documents', 'url'=>['document/index']],
+             ['label' => 'Services', 'url' => '#services',],
+             ['label'=>'About Us', 'url'=>'#about'],
              ['label' => 'Sign Up', 'url' => ['index']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['index']]
+                ['label' => 'Login', 'url' => ['site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['#'], 'post')
@@ -62,34 +70,65 @@ AppAsset::register($this);
 
         ],
     ]);
-    echo "<form class='navbar-form navbar-right' role='search'>
-       <div class='form-group has-feedback'>
-            <input id='searchbox' type='text' placeholder='Search' class='form-control'>
-            <a href='#'><span id='searchicon' class='glyphicon glyphicon-search form-control-feedback'></span></a>
-
-           
-         </form>";
      NavBar::end();
     ?>
+
     <?php
    
     ?>
-     <?= $content ?>
-    <div class='container'>
+   
+ 
+        
         <?= Breadcrumbs::widget([
+
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            
+
         ]) ?>
+               <?= $content ?>
         <?= Alert::widget()  ?>
          
-    </div>  
-  
-<footer class='footer'>
-    <div class='container'>
-        <p class='pull-left'>&copy; ISTMS <?= date('Y') ?></p>
+ 
+  <footer class="main-footer">
 
+        <div class="footer-top">
+            
+        </div>
+
+
+        <div class="footer-main">
+            <div class="container">
+                
+                <div class="row">
+        <div class="footer-bottom">
+           
+            <div class="row">
+
+                    <div class="col-sm-4 col-xs-12">
+
+                        
+                      
+                    </div>
+                    <div class="col-sm-4 col-xs-12 text-center">
+                    <h3>ISTMS - DHS</h3><br>
+                    <i class="fa fa-copyright"></i> copyrights <?= date('Y-m-d') ?>
+                    </div>
+
+                    
+
+
+                  </div>
+
+        </div>
+        <footer>
+            
+        <div class='container'>
         <p class='pull-right'><?= Yii::powered() ?></p>
+
     </div>
-</footer>
+        </footer>
+    </footer> <!-- main-footer -->
+
 
 <?php $this->endBody() ?>
 </body>

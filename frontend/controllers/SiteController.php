@@ -12,6 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use app\models\Documents;
 
 /**
  * Site controller
@@ -90,6 +91,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
+            
             return $this->render('login', [
                 'model' => $model,
             ]);
@@ -209,5 +211,27 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }   
+   public function actionDocuments()
+    {
+        $model = new Documents();
+    
+        // if the post data is set, the user submitted the form
+        if ($model->load(Yii::$app->request->post())) {
+            
+            // in that case, validate the data
+            if ($model->validate()) {
+                
+                // save it to the database
+                $model->save();     
+                return;
+            }
+        }
+    
+        // by default, diplay the form
+        return $this->render('documents', [
+            'model' => $model,
+        ]);
     }
+
 }
