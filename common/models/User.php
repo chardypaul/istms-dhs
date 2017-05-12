@@ -25,7 +25,9 @@ class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
-
+    const USER_TYPE_USER = 2;
+    const USER_TYPE_ENCODER = 1;
+    const USER_TYPE_ADMIN = 3;
 
     /**
      * @inheritdoc
@@ -185,5 +187,35 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public static function getRole() {
+        return $this->role;
+    }
+
+    
+
+    // public function findByUsername($username) {
+    //     return self::findOne($username);
+    // }
+
+    // public function findRole($username) {
+    //     return self::find()->where('username', $username)->all();
+    // }
+
+    // public static function getData() {
+    //     return "anything";
+    // }
+
+    public function isUser() {
+        return $this->role === self::USER_TYPE_USER;
+    }
+
+    public function isEncoder() {
+        return $this->role === self::USER_TYPE_ENCODER;
+    }
+
+    public function isAdmin() {
+        return $this->role === self::USER_TYPE_ADMIN;
     }
 }

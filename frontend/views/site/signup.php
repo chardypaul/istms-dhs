@@ -16,20 +16,24 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>Please fill out the following fields to signup:</p>
 
     <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+        <div class="col-lg-12">
+            <?php yii\widgets\Pjax::begin(['id' => 'sign-up']) ?>
+                <?php $form = ActiveForm::begin(['id' => 'form-signup', 'options' => ['data-pjax' => true]]); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                    <?= $form->field($model, 'role')->dropDownList(['2' => 'User', '1' => 'Encoder']) ?>
 
-                <?= $form->field($model, 'email') ?>
+                    <?= $form->field($model, 'username') ?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
+                    <?= $form->field($model, 'email') ?>
 
-                <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-                </div>
+                    <?= $form->field($model, 'password')->passwordInput() ?>
 
-            <?php ActiveForm::end(); ?>
+                    <div class="form-group">
+                        <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    </div>
+
+                <?php ActiveForm::end(); ?>
+            <?php yii\widgets\Pjax::end() ?>
         </div>
     </div>
 </div>

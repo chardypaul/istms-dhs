@@ -75,4 +75,8 @@ class LoginForm extends Model
 
         return $this->_user;
     }
+
+    // public function getUsername() {
+    //     return $this->username;
+    // }
 }

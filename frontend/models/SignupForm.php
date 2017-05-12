@@ -9,10 +9,10 @@ use common\models\User;
  */
 class SignupForm extends Model
 {
+    public $role;
     public $username;
     public $email;
     public $password;
-
 
     /**
      * @inheritdoc
@@ -20,15 +20,16 @@ class SignupForm extends Model
     public function rules()
     {
         return [
+            ['role', 'required'],
             ['username', 'trim'],
             ['username', 'required'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
-            ['username', 'string', 'min' => 2, 'max' => 255],
+            ['username', 'string', 'min' => 2, 'max' => 20],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'string', 'max' => 255],
+            ['email', 'string', 'max' => 30],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
             ['password', 'required'],
@@ -52,6 +53,7 @@ class SignupForm extends Model
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
+        $user->role = $this->role;
         
         return $user->save() ? $user : null;
     }

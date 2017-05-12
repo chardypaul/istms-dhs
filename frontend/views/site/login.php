@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Login';
+$this->title = 'Sign in';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
@@ -16,17 +16,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>Please fill out the following fields to login:</p>
 
     <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+        <div class="col-lg-12">
+            <?php yii\widgets\Pjax::begin(['id' => 'log-in']) ?>
+            <?php $form = ActiveForm::begin(['id' => 'login-form', 'options' => ['data-pjax' => true]]); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'username') ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
                 <div style="color:#999;margin:1em 0">
-                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
+                    If you forgot your password you can <?= Html::a('reset it', 'javascript:;', ['options' => ['class' => '.tadaaa']]) ?>.
                 </div>
 
                 <div class="form-group">
@@ -34,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
             <?php ActiveForm::end(); ?>
+            <?php yii\widgets\Pjax::end() ?>
         </div>
     </div>
 </div>
