@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'email') ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Send', ['class' => 'btn btn-primary']) ?>
+                    <?= Html::submitButton('Send', ['class' => 'btn btn-primary', 'style' => 'width: 100%; padding: 10px;']) ?>
                 </div>
             <?php ActiveForm::end(); ?>
         </div>

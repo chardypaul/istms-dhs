@@ -2,7 +2,6 @@
 
 namespace common\components;
 
-use common\models\User;
 
 class AccessRule extends \yii\filters\AccessRule {
 	/**
@@ -10,11 +9,11 @@ class AccessRule extends \yii\filters\AccessRule {
      */
 
 	protected function matchRole($user) {
-		if (empty($this->role)) {
+		if (empty($this->roles)) {
 			return true;
 		}
 
-		foreach ($this->role as $roles) {
+		foreach ($this->roles as $roles) {
 			if ($roles === '?') {
 				if ($user->getIsGuest()) {
 					return true;
@@ -27,6 +26,7 @@ class AccessRule extends \yii\filters\AccessRule {
 				return true;
 			}
 		}
+		return false;
 	}
 }
 

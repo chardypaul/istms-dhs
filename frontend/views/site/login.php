@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\bootstrap\Tabs;
 
 $this->title = 'Sign in';
 $this->params['breadcrumbs'][] = $this->title;
@@ -26,12 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
-                <div style="color:#999;margin:1em 0">
-                    If you forgot your password you can <?= Html::a('reset it', 'javascript:;', ['options' => ['class' => '.tadaaa']]) ?>.
-                </div>
-
                 <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button', 'style' => 'width:100%; padding: 10px;']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>
