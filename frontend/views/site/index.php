@@ -8,26 +8,8 @@ $this->title = 'Document Handling System';
 <html lang="en">
 
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-
-
-
-    <!-- Custom Fonts -->
     <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-   
-    <!-- Plugin CSS -->
-
-    <!-- Theme CSS -->
-   
-  
-
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="vendor/js/jquery.easing.min.js"></script>
     <script src="vendor/js/bootstrap.min.js"></script>
@@ -53,7 +35,7 @@ $this->title = 'Document Handling System';
             </div>
         </div>
     </header>
-  <section class="bg-primary" id="documents">
+    <section class="bg-primary" id="documents">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -66,7 +48,6 @@ $this->title = 'Document Handling System';
             </div>
         </div>
     </section>
-    
      <section id="services">
         <div class="container">
             <div class="row">
@@ -115,7 +96,5 @@ $this->title = 'Document Handling System';
             </div>
         </div>
     </section>
-  
 </body>
-    
 </html>

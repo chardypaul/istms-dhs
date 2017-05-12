@@ -63,34 +63,29 @@ class DocumentController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    
     public function actionCreate()
     {
-        $model = new Documents();
+    $model = new Documents();
+    if ($model->load(Yii::$app->request->post())) 
+    {      
+        $project =$model->doc_name;
+        $model->upload_file= UploadedFile::getInstance($model,'doc_file');
+        $model->upload_file->saveAs('uploads/'.$project.'.'.$model->upload_file->extension);
+        $model->doc_file='uploads/'.$project.'.'.$model->upload_file->extension;
+        $model->save();
 
-        if ($model->load(Yii::$app->request->post()))  {
-           
-            $upload_file = $model->uploadFile();
- 
-            var_dump($model->validate());
-            if ($model->validate()) {   
-                if($model->save()) {
- 
-                    if ($upload_file !== false) {
-                      $path = Yii::app()->runtimePath.'/documents/files/'.$model->doc_file;
-                    $model->doc_file->saveAs($path);
-                    }
- 
-                    
-                }
- 
-            }
+        Yii::$app->getSession()->setFlash('success','Data saved!');
+        return $this->redirect(['view','id'=> $model->reference_no]);
+        } 
 
-            
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+        else {
+
+        return $this ->render('create', [
+            'model'=>$model,
+        ]);
+        }         
+
     }
 
     /**
@@ -102,16 +97,26 @@ class DocumentController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->reference_no]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        $current_image = $model->upload_file;
+        if ($model->load(Yii::$app->request->post())) {         
+        $project =$model->doc_name;
+        $model->upload_file= UploadedFile::getInstance($model,'doc_file');
+        if(!empty($model->upload_file) && $model->upload_file->size !== 0) {
+            //print_R($image);die;
+        $model->upload_file->saveAs('uploads/'.$project.'.'.$model->upload_file->extension);
+        $model->doc_file='uploads/'.$project.'.'.$model->upload_file->extension;
         }
+        else
+        $model->upload_file = $current_image;
+        $model->save();
+          Yii::$app->getSession()->setFlash('success','Data updated!');
+        return $this->redirect(['view', 'id' => $model->reference_no]);
+    } else {
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
-
+    }
     /**
      * Deletes an existing Documents model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -121,7 +126,7 @@ class DocumentController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        
         return $this->redirect(['index']);
     }
 
@@ -140,4 +145,16 @@ class DocumentController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    public function actionDownload($id) 
+{ 
+        $download = Documents::findOne($id); 
+         $path=Yii::getAlias('@webroot').'/'.$download->doc_file;
+        if (file_exists($path)) {
+            return Yii::$app->response->sendFile($path);
+        } else {
+            throw new NotFoundHttpException("can't find {$download->doc_file} file");
+        }
+
+}
+
 }

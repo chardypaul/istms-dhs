@@ -32,11 +32,12 @@ class Documents extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['reference_no', 'subject', 'doc_date', 'doc_for', 'drawer_id','doc_from', 'doc_file'], 'required'],
+            [['reference_no', 'subject', 'doc_date', 'doc_for', 'drawer_id','doc_from','doc_name','doc_file'], 'required'],
             [['reference_no'], 'integer'],
             [['doc_date'], 'safe'],
-            [['subject', 'doc_for', 'drawer_id','doc_from'], 'string', 'max' => 250],
-            [['doc_file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'docx, docs',],
+           
+            [['subject', 'doc_for', 'drawer_id','doc_from','doc_name'], 'string', 'max' => 250],
+            [['doc_file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'docx, docs, doc',],
       
         ];
     }
@@ -47,13 +48,14 @@ class Documents extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'reference_no' => 'Reference No',
-            'subject' => 'Doccument Subject',
-            'doc_date' => 'Document Entry Date',
-            'doc_for' => 'Document Receiver',
-            'doc_from' => 'Document',
-            'drawer_id' => 'Document Location',
-            'doc_file' => 'Document File',
+            'reference_no' => 'Reference No:',
+            'subject' => 'Document Subject:',
+            'doc_date' => 'Entry Date:',
+            'doc_for' => 'For:',
+            'doc_from' => 'From:',
+            'drawer_id' => 'Document Location:',
+            'doc_name' => 'Document Name:',
+            'doc_file' => 'Document Path:',
         ];
     }
       public function uploadFile() {

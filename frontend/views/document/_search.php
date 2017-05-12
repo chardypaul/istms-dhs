@@ -25,7 +25,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'doc_from') ?>
 
+     <?= $form->field($model, 'doc_name') ?>
+
     <?php echo $form->field($model, 'drawer_id') ?>
+
+
 
     <?php echo $form->field($model, 'doc_file') ?>
 

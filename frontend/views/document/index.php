@@ -49,15 +49,16 @@ $this->params['breadcrumbs'][] = $this->title;
      NavBar::end();
     ?>
 <div class="documents-index" id="index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+    <center>
+    <h1 style="color:#F05F40">Document Handling System</h1>
+    </center>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Documents', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Documents', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
+    <?=GridView::widget([
+         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
@@ -66,14 +67,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'doc_date',
             'doc_for',
             'doc_from',
-             [
-            'attribute' => 'Full Name' ,
-            'value' => function($model) { return $model->doc_file  . " " . $model->doc_for;},
-             ],
             'drawer_id',
-           'doc_file',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            'doc_name',
+            'doc_file',
+        [
+        'class'    => 'yii\grid\ActionColumn',
         ],
-    ]); ?>
+        ['attribute'=>'',
+        'format'=>'raw',
+        'value' => function($data)
+        {
+        return
+        Html::a('', ['document/download', 'id' => $data->reference_no],['class' => 'fa fa-download']);
+
+        }
+        ],
+            ]
+]); ?>
 </div>

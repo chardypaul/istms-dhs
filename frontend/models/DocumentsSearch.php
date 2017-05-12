@@ -19,7 +19,7 @@ class DocumentsSearch extends Documents
     {
         return [
             [['reference_no'], 'integer'],
-            [['subject', 'doc_date', 'doc_for', 'doc_from', 'drawer_id', 'doc_file'], 'safe'],
+            [['subject', 'doc_date', 'doc_for', 'doc_from', 'drawer_id', 'doc_name', 'doc_file'], 'safe'],
         ];
     }
 
@@ -67,6 +67,7 @@ class DocumentsSearch extends Documents
             ->andFilterWhere(['like', 'doc_for', $this->doc_for])
             ->andFilterWhere(['like', 'doc_from', $this->doc_from])
             ->andFilterWhere(['like', 'drawer_id', $this->drawer_id])
+              ->andFilterWhere(['like', 'doc_name', $this->doc_name])
             ->andFilterWhere(['like', 'doc_file', $this->doc_file]);
 
         return $dataProvider;

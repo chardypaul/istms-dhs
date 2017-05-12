@@ -10,10 +10,17 @@ $this->title = 'Create Documents';
 $this->params['breadcrumbs'][] = ['label' => 'Documents', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<head>
+	<style>
+		.color{
+			color:#F05F40;
+		}
+	</style>
+</head>
 <div class="documents-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+	<center>
+    <h1 class="color"><?= Html::encode($this->title) ?></h1>
+    </center>
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
